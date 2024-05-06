@@ -1,0 +1,5 @@
+package project.wipro.user.repository;
+
+public class UserRepository {
+
+}

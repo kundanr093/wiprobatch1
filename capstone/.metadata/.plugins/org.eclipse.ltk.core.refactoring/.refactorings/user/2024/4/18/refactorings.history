@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;GlobalExceptionHandler.java&apos; to &apos;hotel/src/main/java/project.wipro.hotel.exception&apos;&#x0D;&#x0A;- Original project: &apos;user&apos;&#x0D;&#x0A;- Destination element: &apos;hotel/src/main/java/project.wipro.hotel.exception&apos;&#x0D;&#x0A;- Original element: &apos;project.wipro.user.exception.GlobalExceptionHandler.java&apos;" description="Copy compilation unit" destination="=hotel/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;project.wipro.hotel.exception" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;project.wipro.user.exception{GlobalExceptionHandler.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1714456735623" units="1" version="1.0"/>
+</session>

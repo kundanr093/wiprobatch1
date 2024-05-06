@@ -1,0 +1,5 @@
+package project.wipro.transaction.repository;
+
+public class TransactionRepository {
+
+}

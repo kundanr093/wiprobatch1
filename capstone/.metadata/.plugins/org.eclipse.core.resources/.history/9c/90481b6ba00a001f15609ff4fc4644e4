@@ -1,0 +1,14 @@
+package project.wipro.transaction.service;
+
+import java.util.List;
+
+import project.wipro.transaction.entity.Transaction;
+
+public interface PaymentService {
+
+	TransactionResponse makeTxn(Transaction txn);
+	
+	Transaction viewTxnById(int id);
+	
+	List<Transaction> viewAllTxn();
+}

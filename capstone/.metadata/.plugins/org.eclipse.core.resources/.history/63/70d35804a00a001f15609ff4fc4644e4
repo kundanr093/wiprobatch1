@@ -1,0 +1,5 @@
+package project.wipro.transaction.service;
+
+public interface IBookingService {
+
+}

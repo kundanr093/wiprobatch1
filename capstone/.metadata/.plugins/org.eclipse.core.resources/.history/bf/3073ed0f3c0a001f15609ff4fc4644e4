@@ -1,0 +1,14 @@
+spring.application.name=HOTEL-SERVICE
+
+server.port = 8085
+
+spring.datasource.url = jdbc:oracle:thin:@localhost:1521:XE
+spring.datasource.username = c##pservice
+spring.datasource.password = pservice123
+
+spring.jpa.hibernate.naming-strategy=org.hibernate.cfg.ImprovedNamingStrategy
+
+spring.jpa.show-sql = true
+spring.jpa.hibernate.ddl-auto = create
+
+#management.endpoints.web.exposure.include= *

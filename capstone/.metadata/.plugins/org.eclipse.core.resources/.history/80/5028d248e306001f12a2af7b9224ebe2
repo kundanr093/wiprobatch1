@@ -1,0 +1,53 @@
+package project.wipro.hotel.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import project.wipro.hotel.entity.Room;
+import project.wipro.hotel.repository.RoomRepository;
+
+@Service
+public class RoomService implements IRoomService{
+
+	@Autowired
+	private RoomRepository roomRepository;
+	
+	
+	@Override
+	public Room addRoomDetails(Room room) {
+		roomRepository.save(room);
+		return room;
+	}
+
+	@Override
+	public Room updateRoomDetails(Room room) {
+		Optional<Room> optionalRoom = roomRepository.findById(room.getRoomId());
+		if(optionalRoom.isEmpty()) {
+			throw new RoomNotFoundException("Room not found with id: "+room.getRoomId());
+		}
+		roomRepository.save(room);
+		return room;
+	}
+
+	@Override
+	public Room removeRoomDetails(int roomId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Room> showAllRoomDetails() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Room showRoomDetails(int roomId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

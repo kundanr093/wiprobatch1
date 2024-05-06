@@ -1,0 +1,172 @@
+package project.wipro.hotel.room;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import project.wipro.hotel.entity.Room;
+import project.wipro.hotel.model.RoomModel;
+import project.wipro.hotel.repository.RoomRepository;
+import project.wipro.hotel.service.RoomService;
+
+@SpringBootTest
+public class RoomServiceTest {
+
+    @Mock
+    private RoomRepository roomRepository;
+
+    @InjectMocks
+    private RoomService roomService;
+
+    @Test
+    public void testAddRoom_Success() {
+        // Mocking room data
+        Room addRoom = new Room();
+        
+        
+        addRoom.setRoomNo("101");
+        addRoom.setRoomType("ac");
+        addRoom.setRatePerDay(1000);
+        addRoom.setIsAvailable(true);
+
+
+        // Mocking RoomRepository's save method
+        when(roomRepository.save(addRoom)).thenReturn(addRoom);
+
+        // Adding the room
+        roomRepository.save(addRoom);
+
+        // Verifying that the save method was called with the roomToAdd object
+        verify(roomRepository).save(addRoom);
+        
+    }
+    
+    
+    @Test
+    public void testUpdateRoom_Success() {
+        // Mocking existing room data
+        Room existingRoom = new Room();
+        
+        existingRoom.setRoomNo("101");
+        existingRoom.setRoomType("ac");
+        existingRoom.setRatePerDay(1000);
+        existingRoom.setIsAvailable(true);
+        existingRoom.setRoomId(1);
+        
+        // Mocking updated room data
+        Room updatedRoom = new Room();
+        updatedRoom.setRoomId(1);
+        updatedRoom.setRoomNo("101");
+        updatedRoom.setRoomType("non-ac");
+        updatedRoom.setRatePerDay(1000);
+        updatedRoom.setIsAvailable(true);
+
+
+        // Mocking RoomRepository's findById method
+        when(roomRepository.findById(1)).thenReturn(Optional.of(existingRoom));
+
+        // Updating the room
+        roomService.updateRoomDetails(updatedRoom);
+
+        // Verifying that the save method was called with the updated room object
+        verify(roomRepository).save(updatedRoom);
+    }
+    
+    @Test
+    public void testRemoveRoom_Success() {
+        // Mocking existing room data
+        Room existingRoom = new Room();
+        existingRoom.setRoomNo("101");
+        existingRoom.setRoomType("ac");
+        existingRoom.setRatePerDay(1000);
+        existingRoom.setIsAvailable(true);
+        existingRoom.setRoomId(1);
+
+        // Mocking RoomRepository's findById method
+        when(roomRepository.findById(1)).thenReturn(java.util.Optional.of(existingRoom));
+
+        // Removing the room
+        roomService.removeRoomDetails(1);
+
+        // Verifying that the deleteById method was called with the room ID
+        verify(roomRepository).deleteById(1);
+    }
+    
+    
+    
+    @Test
+    public void testShowRoom_Success() {
+        // Mocking room data
+Room addRoom = new Room();
+        
+        
+        addRoom.setRoomNo("101");
+        addRoom.setRoomType("ac");
+        addRoom.setRatePerDay(1000);
+        addRoom.setIsAvailable(true);
+
+        // Mocking RoomRepository's findById method
+        when(roomRepository.findById(1)).thenReturn(Optional.of(addRoom));
+
+        // Retrieving the room
+        Room result = roomService.getRoom(1);
+
+        // Asserting the retrieved room
+        assertEquals(addRoom, result);
+    }
+
+    @Test
+    public void testShowRoom_RoomNotFound() {
+        // Mocking RoomRepository's findById method to return null
+        when(roomRepository.findById(1)).thenReturn(Optional.empty());
+
+        // Attempting to show a non-existing room should return null
+        Room result = roomService.getRoom(1);
+
+        assertEquals(null, result);
+    }
+
+    @Test
+    public void testShowAllRooms_Success() {
+        // Mocking room data
+        List<Room> roomList = new ArrayList<>();
+
+Room addRoom1 = new Room();
+        
+        
+        addRoom1.setRoomNo("101");
+        addRoom1.setRoomType("ac");
+        addRoom1.setRatePerDay(1000);
+        addRoom1.setIsAvailable(true);
+        
+Room addRoom2 = new Room();
+        
+        
+        addRoom2.setRoomNo("102");
+        addRoom2.setRoomType("non-ac");
+        addRoom2.setRatePerDay(8000);
+        addRoom2.setIsAvailable(true);
+        
+        roomList.add(addRoom1);
+        roomList.add(addRoom2);
+        // Mocking RoomRepository's findAll method
+        when(roomRepository.findAll()).thenReturn(roomList);
+
+        // Retrieving all rooms
+        List<Room> result = roomService.showAllRoomDetails();
+
+        // Asserting the retrieved room list
+        assertEquals(roomList.size(), result.size());
+        assertEquals(roomList, result);
+    }
+    
+}

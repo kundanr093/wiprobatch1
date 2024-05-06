@@ -1,0 +1,46 @@
+package project.wipro.transaction.entity;
+
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.OneToOne;
+
+
+public class Transaction {
+
+	private int transaction_id;
+	private double paid_amount;
+	
+	@OneToOne
+	@JsonIgnore
+	private int booking_id;
+	private LocalDate txn_date;
+	public int getTransaction_id() {
+		return transaction_id;
+	}
+	public void setTransaction_id(int transaction_id) {
+		this.transaction_id = transaction_id;
+	}
+	public double getPaid_amount() {
+		return paid_amount;
+	}
+	public void setPaid_amount(double paid_amount) {
+		this.paid_amount = paid_amount;
+	}
+	public int getBooking_id() {
+		return booking_id;
+	}
+	public void setBooking_id(int booking_id) {
+		this.booking_id = booking_id;
+	}
+	public LocalDate getTxn_date() {
+		return txn_date;
+	}
+	public void setTxn_date(LocalDate txn_date) {
+		this.txn_date = txn_date;
+	}
+
+	
+
+}

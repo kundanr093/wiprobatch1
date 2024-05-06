@@ -1,0 +1,8 @@
+package project.wipro.hotel.service.repository;
+
+public class HotelNotFoundException extends RuntimeException {
+
+	public HotelNotFoundException(String msg) {
+		super(msg);
+	}
+}

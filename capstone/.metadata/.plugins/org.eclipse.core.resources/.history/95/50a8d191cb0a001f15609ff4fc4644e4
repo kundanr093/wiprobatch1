@@ -1,0 +1,85 @@
+package project.wipro.user.service;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import project.wipro.user.entity.User;
+import project.wipro.user.exception.UserNotFoundException;
+import project.wipro.user.repository.UserRepository;
+
+@SpringBootTest
+public class UserServiceTest {
+
+	
+    @Mock
+    private UserRepository userRepository;
+
+    @InjectMocks
+    private UserService userService;
+    
+    @Test
+    public void testCreateUser() {
+    	User newUser = new User();
+    	newUser.setUser_id(1);
+    	newUser.setName("Kundan");
+    	newUser.setEmail("kundan@gmail.com");
+    	newUser.setMobile("1234567890");
+    	newUser.setAddress("ggn");
+    	newUser.setPassword("kundan123");
+    	newUser.setRole("user");
+    	
+    	when(userRepository.save(newUser)).thenReturn(newUser);
+    	
+    	User createdUser = userService.addUser(newUser);
+    	
+    	assertEquals(newUser.getName(), createdUser.getName());
+    	assertEquals(newUser.getUser_id(), createdUser.getUser_id());
+    	assertEquals(newUser.getEmail(), createdUser.getEmail());
+    	assertEquals(newUser.getMobile(), createdUser.getMobile());
+    	assertEquals(newUser.getAddress(), createdUser.getAddress());
+    	assertEquals(newUser.getPassword(), createdUser.getPassword());
+    	assertEquals(newUser.getRole(), createdUser.getRole());
+    	
+    }
+    
+    @Test
+    public void testRemoveUser_Success() {
+        // Mocking user data
+    	User newUser = new User();
+    	newUser.setUser_id(1);
+    	newUser.setName("Kundan");
+    	newUser.setEmail("kundan@gmail.com");
+    	newUser.setMobile("1234567890");
+    	newUser.setAddress("ggn");
+    	newUser.setPassword("kundan123");
+    	newUser.setRole("user");
+
+        // Mocking UserRepository's findById method
+        when(userRepository.findById(1)).thenReturn(java.util.Optional.of(newUser));
+
+        // Mocking UserRepository's delete method
+        doNothing().when(userRepository).delete(newUser);
+
+        // Removing the user
+        userService.removeUser(1);
+
+        // Asserting user is removed successfully
+        // Additional assertions can be added if necessary
+    }
+    
+    @Test
+    public void testRemoveUser_UserNotFound(){
+        // Mocking UserRepository's findById method to return null
+        when(userRepository.findById(1)).thenReturn(java.util.Optional.empty());
+
+        // Removing a non-existing user should throw UserNotFoundException
+        assertThrows(UserNotFoundException.class, () -> userService.removeUser(1));
+    }
+}

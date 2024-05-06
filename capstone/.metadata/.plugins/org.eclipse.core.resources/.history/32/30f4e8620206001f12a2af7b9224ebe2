@@ -1,0 +1,46 @@
+package project.wipro.user.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import project.wipro.user.entity.User;
+import project.wipro.user.repository.UserRepository;
+
+public class UserService implements IUserService{
+
+	private UserRepository userRepository;
+	
+	@Override
+	public User addUser(User user) {
+		userRepository.save(user);
+		return user;
+	}
+
+	@Override
+	public User updateUser(User user) {
+		Optional<User> optionalUser = userRepository.findById(user.getUser_id());
+		if(optionalUser.isEmpty()) {
+			throw new UserNotFoundException("User not found with id: " +user.getUser_id());
+		}
+		return null;
+	}
+
+	@Override
+	public User removeUser(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> showAllUsers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User showUser(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

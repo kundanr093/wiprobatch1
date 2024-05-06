@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="project.wipro.user" project="user" tests="2" started="2" failures="0" errors="1" ignored="0">
+  <testsuite name="project.wipro.user.service.UserServiceTest" time="0.002" displayname="UserServiceTest" uniqueid="[engine:junit-jupiter]/[class:project.wipro.user.service.UserServiceTest]">
+    <testcase name="testCreateUser" classname="project.wipro.user.service.UserServiceTest" time="0.002" displayname="testCreateUser()" uniqueid="[engine:junit-jupiter]/[class:project.wipro.user.service.UserServiceTest]/[method:testCreateUser()]">
+      <error>java.lang.NullPointerException: Cannot invoke "project.wipro.user.repository.UserRepository.save(Object)" because "this.userRepository" is null&#13;
+	at project.wipro.user.service.UserServiceTest.testCreateUser(UserServiceTest.java:33)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="project.wipro.user.UserApplicationTests" time="2.59" displayname="UserApplicationTests" uniqueid="[engine:junit-jupiter]/[class:project.wipro.user.UserApplicationTests]">
+    <testcase name="contextLoads" classname="project.wipro.user.UserApplicationTests" time="2.59" displayname="contextLoads()" uniqueid="[engine:junit-jupiter]/[class:project.wipro.user.UserApplicationTests]/[method:contextLoads()]"/>
+  </testsuite>
+</testrun>

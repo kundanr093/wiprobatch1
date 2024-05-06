@@ -1,0 +1,5 @@
+package project.wipro.transaction.exception;
+
+public class PaymentFailedException {
+
+}

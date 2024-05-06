@@ -1,0 +1,5 @@
+package project.wipro.transaction.model;
+
+public class TransactionResponse {
+
+}

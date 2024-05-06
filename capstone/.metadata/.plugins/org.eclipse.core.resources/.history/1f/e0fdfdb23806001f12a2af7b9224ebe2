@@ -1,0 +1,19 @@
+package project.wipro.user.controler;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import project.wipro.user.entity.User;
+import project.wipro.user.service.UserService;
+
+@RestController
+@RequestMapping("/user")
+public class UserController {
+
+	@Autowired
+	private UserService userService;
+	
+	
+}

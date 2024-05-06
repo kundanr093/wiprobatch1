@@ -1,0 +1,32 @@
+package project.wipro.hotel.service;
+
+import java.util.List;
+
+import project.wipro.hotel.entity.Hotel;
+import project.wipro.hotel.entity.Room;
+import project.wipro.hotel.model.RoomModel;
+
+public interface IHotelService {
+
+	Hotel addHotel(Hotel hotel);
+
+	Hotel updateHotel(Hotel hotel);
+
+	Hotel removeHotel(int hotelId);
+
+	List<Hotel> showAllHotels();
+
+	Hotel showHotel(int hotelId);
+
+	// room service
+
+	public Room addRoomDetails(RoomModel roomModel);
+
+	public Room updateRoomDetails(Room room);
+
+	public Room removeRoomDetails(int roomId);
+
+	public List<Room> showAllRoomDetails();
+
+	public Room showRoomDetails(int roomId);
+}

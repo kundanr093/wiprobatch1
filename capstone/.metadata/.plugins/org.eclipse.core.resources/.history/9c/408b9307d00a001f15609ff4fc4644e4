@@ -1,0 +1,46 @@
+package project.wipro.hotel.room;
+
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+
+import project.wipro.hotel.entity.Room;
+import project.wipro.hotel.model.RoomModel;
+import project.wipro.hotel.repository.RoomRepository;
+import project.wipro.hotel.service.RoomService;
+
+
+public class RoomServiceTest {
+
+    @Mock
+    private RoomRepository roomRepository;
+
+    @InjectMocks
+    private RoomService roomService;
+
+    @Test
+    public void testAddRoom_Success() {
+        // Mocking room data
+        Room addRoom = new Room();
+        
+        
+        addRoom.setRoomNo("101");
+        addRoom.setRoomType("ac");
+        addRoom.setRatePerDay(1000);
+        addRoom.setAvailable(true);
+        addRoom.setHotelId(1);
+
+        // Mocking RoomRepository's save method
+        when(roomRepository.save(addRoom)).thenReturn(addRoom);
+
+        // Adding the room
+        roomService.addRoomDetails(addRoom);
+
+        // Verifying that the save method was called with the roomToAdd object
+        verify(roomRepository).save(addRoom);
+        
+    }
+}

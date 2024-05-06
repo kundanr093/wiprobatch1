@@ -1,0 +1,90 @@
+package project.wipro.hotel.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import project.wipro.hotel.entity.Hotel;
+import project.wipro.hotel.entity.Room;
+import project.wipro.hotel.exception.HotelNotFoundException;
+import project.wipro.hotel.exception.RoomNotFoundException;
+import project.wipro.hotel.model.RoomModel;
+import project.wipro.hotel.repository.HotelRepository;
+import project.wipro.hotel.repository.RoomRepository;
+
+@Service
+public class RoomService implements IRoomService{
+
+	@Autowired
+	private RoomRepository roomRepository;
+	
+	@Autowired
+	private HotelRepository hotelRepository;
+	
+	@Override
+	public Room addRoomDetails(Room roomModel) {
+		Optional<Hotel> hotel = hotelRepository.findById(roomModel.getHotelId());
+		if(hotel.isEmpty()) {
+			throw new HotelNotFoundException("hotel not found exception"+roomModel.getHotelId());
+		}
+		
+		Room room = new Room();
+		
+		room.setHotel(hotel.get());
+		
+		room.setRoomNo(roomModel.getRoomNo());
+		room.setRoomType(roomModel.getRoomType());
+		room.setRatePerDay(roomModel.getRatePerDay());
+		room.setIsAvailable(roomModel.isAvailable());
+		
+		roomRepository.save(room);
+		return room;
+	}
+
+	//update room details
+	@Override
+	public Room updateRoomDetails(Room room) {
+		Optional<Room> optionalRoom = roomRepository.findById(room.getRoomId());
+		if(optionalRoom.isEmpty()) {
+			throw new RoomNotFoundException("Room not found with id: "+room.getRoomId());
+		}
+		roomRepository.save(room);
+		return room;
+	}
+
+	
+	//delete room details
+	@Override
+	public Room removeRoomDetails(int roomId) {
+		Optional<Room> optionalRoom = roomRepository.findById(roomId);
+		if(optionalRoom.isEmpty()) {
+			throw new RoomNotFoundException("Room not found with id: "+roomId);
+		}
+		Room room = optionalRoom.get();
+		roomRepository.delete(room);
+		return room;
+	}
+
+	
+	//get all room details 
+	@Override
+	public List<Room> showAllRoomDetails() {
+		List<Room> allRooms = roomRepository.findAll();
+		return allRooms;
+	}
+
+	//get room details by id
+	@Override
+	public Room getRoom(int roomId) {
+		Optional<Room> optionalRoom = roomRepository.findById(roomId);
+		if(optionalRoom.isEmpty()) {
+			throw new RoomNotFoundException("Room not found with id: "+roomId);
+		}
+		Room room = optionalRoom.get();
+		
+		return room;
+	}
+
+}

@@ -1,0 +1,15 @@
+package com.hotelbooking.bookingservice.service;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.hotelbooking.bookingservice.model.Room;
+
+@FeignClient(name="HOTEL")
+public interface IRoomService {
+
+	@GetMapping("/rooms/{id}")
+	public Room showRoomDetails(@PathVariable("id") int roomId);
+	
+}

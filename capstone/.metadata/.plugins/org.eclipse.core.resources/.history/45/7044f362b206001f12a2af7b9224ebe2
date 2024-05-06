@@ -1,0 +1,5 @@
+package project.wipro.hotel.service;
+
+public class HotelService {
+
+}

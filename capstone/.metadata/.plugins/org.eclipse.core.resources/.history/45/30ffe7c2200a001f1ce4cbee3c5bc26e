@@ -1,0 +1,52 @@
+package com.hotelbooking.bookingservice.model;
+
+import lombok.Data;
+
+@Data
+public class Room {
+    private int roomId;
+	private String roomNo;
+	private String roomType;
+	private double ratePerDay;
+	private boolean isavailable;
+	private Hotel hotel;
+	public int getRoomId() {
+		return roomId;
+	}
+	public void setRoomId(int roomId) {
+		this.roomId = roomId;
+	}
+	public String getRoomNo() {
+		return roomNo;
+	}
+	public void setRoomNo(String roomNo) {
+		this.roomNo = roomNo;
+	}
+	public String getRoomType() {
+		return roomType;
+	}
+	public void setRoomType(String roomType) {
+		this.roomType = roomType;
+	}
+	public double getRatePerDay() {
+		return ratePerDay;
+	}
+	public void setRatePerDay(double ratePerDay) {
+		this.ratePerDay = ratePerDay;
+	}
+	public boolean isIsavailable() {
+		return isavailable;
+	}
+	public void setIsavailable(boolean isavailable) {
+		this.isavailable = isavailable;
+	}
+	public Hotel getHotel() {
+		return hotel;
+	}
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
+	}
+	
+	
+
+}

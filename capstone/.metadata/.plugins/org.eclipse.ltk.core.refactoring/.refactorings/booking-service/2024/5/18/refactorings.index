@@ -1,0 +1,12 @@
+1714627151101	Rename package 'com.hotelbooking.bookingservice.dao'
+1714627176333	Rename type 'BookingDao'
+1714627411224	Rename field 'bookingDao'
+1714627587275	Rename type 'BookingService'
+1714627610065	Rename type 'BookingServiceImpl'
+1714627642954	Rename type 'HotelServiceConsumer'
+1714627657856	Rename type 'UserServiceConsumer'
+1714627728559	Rename local variable 'response'
+1714629086585	Rename type 'ResourceNotFoundException'
+1714652522004	Delete element
+1714707219151	Delete element
+1714730854365	Delete element

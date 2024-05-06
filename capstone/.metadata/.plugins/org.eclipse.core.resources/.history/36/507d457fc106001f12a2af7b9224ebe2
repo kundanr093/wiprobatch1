@@ -1,0 +1,5 @@
+package project.wipro.hotel.controller;
+
+public class HotelController {
+
+}

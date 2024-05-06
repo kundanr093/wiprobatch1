@@ -1,0 +1,5 @@
+package project.wipro.user.exception;
+
+public class UserNotFoundException {
+
+}

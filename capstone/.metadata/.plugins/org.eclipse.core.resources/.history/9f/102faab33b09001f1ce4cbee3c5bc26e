@@ -1,0 +1,101 @@
+package com.hotelbooking.bookingservice.service;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hotelbooking.bookingservice.entity.Booking;
+import com.hotelbooking.bookingservice.exception.BookingNotFoundException;
+import com.hotelbooking.bookingservice.exception.DeadlinePassedException;
+import com.hotelbooking.bookingservice.model.BookingResponse;
+import com.hotelbooking.bookingservice.model.Hotel;
+import com.hotelbooking.bookingservice.model.Room;
+import com.hotelbooking.bookingservice.model.User;
+import com.hotelbooking.bookingservice.repository.BookingRepository;
+
+@Service
+public class BookingService implements IBookingService {
+
+	@Autowired
+	BookingRepository bookingRepository;
+
+	@Autowired
+	IUserService userService;
+
+	@Autowired
+	IHotelService hotelService;
+	
+	
+
+	@Override
+
+	public Booking addBooking(Booking booking) {
+		
+		Room room = hotelService.getRoom(booking.getRoomId());
+		room.setIsavailable(false);
+		hotelService.updateRoom(room);
+		bookingRepository.save(booking);
+		return booking;
+	}
+
+	@Override
+	public BookingResponse getBookingDetailsById(int id) {
+		Optional<Booking> optionalbooking = bookingRepository.findById(id);
+		if (optionalbooking.isEmpty()) {
+			throw new BookingNotFoundException("Booking Details Not found with id " + id);
+		}
+		Booking booking = optionalbooking.get();
+
+		User user = userService.getUserById(booking.getUserId());
+		Room room = hotelService.showRoomDetails(booking.getRoomId());
+		Hotel hotel = hotelService.getHotel(booking.getHotelId());
+
+		BookingResponse bookingResponse = new BookingResponse();
+
+		bookingResponse.setCustomerName(user.getUserName());
+		bookingResponse.setHotelName(hotel.getHotelName());
+		bookingResponse.setRoomNo(room.getRoomNo());
+		bookingResponse.setRoomType(room.getRoomType());
+		bookingResponse.setHotelPhone1(hotel.getPhone1());
+		bookingResponse.setHotelPhone2(hotel.getPhone2());
+		bookingResponse.setAmount(booking.getAmount());
+		return bookingResponse;
+	}
+
+	@Override
+	public List<Booking> getAllBookingDetails() {
+		return bookingRepository.findAll();
+	}
+
+	@Override
+	public Booking updateBooking(Booking booking) {
+		int id = booking.getBookingId();
+		Optional<Booking> optionalbooking = bookingRepository.findById(id);
+		if (optionalbooking.isEmpty()) {
+			throw new BookingNotFoundException("Booking Details Not found with id " + id);
+		}
+		return bookingRepository.save(booking);
+	}
+
+	@Override
+	public Booking cancelBooking(int id) {
+		Optional<Booking> optionalbooking = bookingRepository.findById(id);
+		if (optionalbooking.isEmpty()) {
+			throw new BookingNotFoundException("Booking Details Not found with id " + id);
+		}
+		Booking booking = optionalbooking.get();
+		if (LocalDate.now().isAfter(booking.getBookedFromDate().minusDays(1))) {
+			throw new DeadlinePassedException("Cancellation deadline has passed");
+		}
+		booking.setStatus("Cancelled");
+		Room room = hotelService.showRoomDetails(booking.getRoomId());
+		room.setIsavailable(true);
+		hotelService.updateRoom(room);
+
+		return bookingRepository.save(booking);
+	}
+
+}

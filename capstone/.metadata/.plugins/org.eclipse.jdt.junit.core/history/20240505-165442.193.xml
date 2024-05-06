@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="HotelApplicationTests" project="hotel-services" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="project.wipro.hotel.HotelApplicationTests" time="1.668" displayname="HotelApplicationTests" uniqueid="[engine:junit-jupiter]/[class:project.wipro.hotel.HotelApplicationTests]">
+    <testcase name="contextLoads" classname="project.wipro.hotel.HotelApplicationTests" time="1.668" displayname="contextLoads()" uniqueid="[engine:junit-jupiter]/[class:project.wipro.hotel.HotelApplicationTests]/[method:contextLoads()]"/>
+  </testsuite>
+</testrun>

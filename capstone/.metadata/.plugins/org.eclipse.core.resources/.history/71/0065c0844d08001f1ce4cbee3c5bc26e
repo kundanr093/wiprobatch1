@@ -1,0 +1,5 @@
+package project.wipro.hotel.model;
+
+public class RoomModel {
+
+}

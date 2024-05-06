@@ -1,0 +1,5 @@
+package project.wipro.user.entity;
+
+public class User {
+
+}

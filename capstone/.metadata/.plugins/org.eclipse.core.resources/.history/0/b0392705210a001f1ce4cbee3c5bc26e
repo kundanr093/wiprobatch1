@@ -1,0 +1,5 @@
+package project.wipro.user.model;
+
+public class BookingDetails {
+
+}
